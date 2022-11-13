@@ -17,7 +17,8 @@ export const JournalPage = () => {
       {/* NothingSelected: Cuando no hay nada seleccionado se muestra este componente*/}
       {/* <NothingSelectedView /> */}
       {/* NoteView */}
-      <NoteView />
+      {/* <NoteView /> */}
+      <NothingSelectedView />
 
       <IconButton
         size="large"
