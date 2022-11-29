@@ -13,7 +13,6 @@ import { setActiveNote } from "../../store/journal";
 export const SideBarItem = ({ title, body, id, date, imageUrl = [] }) => {
   const dispatch = useDispatch();
   const onClickNote = () => {
-    console.log("me dieron cli");
     dispatch(setActiveNote({ title, body, id, date, imageUrl }));
   };
   const newTitle = useMemo(() => {
