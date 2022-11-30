@@ -10,6 +10,11 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     createValidators();
   }, [formState]);
 
+  // Cambiar el initialForm cuando se cambia de nota en el Sidebar
+  useEffect(() => {
+    setFormState(initialForm);
+  }, [initialForm]);
+
   //memoriza el valor
   const isFormValid = useMemo(() => {
     for (const formValue of Object.keys(formValidation)) {
