@@ -1,8 +1,9 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { fileUpload, loadNotes } from "../../helpers";
 import {
   addNewEmptyNote,
+  deleteNoteById,
   savingNewNote,
   setActiveNote,
   setNotes,
@@ -19,6 +20,7 @@ export const startNewNote = () => {
     const newNote = {
       title: "",
       body: "",
+      imageUrl: [],
       date: new Date().getTime(),
     };
 
@@ -75,5 +77,17 @@ export const startUploadingFiles = (files = []) => {
     const photoUrls = await Promise.all(fileUploadPromises);
     // Establecer o guardar en la nota activa
     dispatch(setPhotosToActiveNote(photoUrls));
+  };
+};
+
+export const startDeletingNote = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    const { active: note } = getState().journal;
+    // Construir la referencia (url firebase) al doc para eliminar la nota
+    const docRef = doc(FirebaseDB, `${uid}/journal/notas/${note.id}`);
+    // Eliminar registro
+    await deleteDoc(docRef);
+    dispatch(deleteNoteById(note.id));
   };
 };
