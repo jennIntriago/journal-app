@@ -25,6 +25,15 @@ export const notAuthenticatedState = {
   errorMessage: null,
 };
 
+export const notAuthenticatedStateArgs = {
+  status: "not-authenticated", //checking not-authenticated, authenticated
+  uid: null,
+  email: null,
+  displayName: null,
+  photoURL: null,
+  errorMessage: "Credenciales no son correctas",
+};
+
 export const demoUser = {
   uid: "123ABC",
   email: "demo@google.com",
