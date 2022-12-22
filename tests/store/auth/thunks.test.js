@@ -1,4 +1,7 @@
-import { signInWithGoogle } from "../../../src/firebase/providers";
+import {
+  loginWithEmailPassword,
+  signInWithGoogle,
+} from "../../../src/firebase/providers";
 import { checkingCredentials, login, logout } from "../../../src/store/auth";
 import {
   checkingAuthentication,
@@ -39,5 +42,11 @@ describe("Pruebas en AuthThunks", () => {
     expect(dispatch).toHaveBeenCalledWith(checkingCredentials());
 
     expect(dispatch).toHaveBeenCalledWith(logout(loginData.errorMessage));
+  });
+
+  test("startLoginWithEmailPassword debe de llamar checkingCredentials y login - Exito ", async () => {
+    const loginData = { ok: true, ...demoUser };
+    const formData = { email: demoUser.email, password: "123456" };
+    await loginWithEmailPassword.mockResolvedValue(loginData);
   });
 });
